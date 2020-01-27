@@ -1,0 +1,44 @@
+---
+title: "DevelopingDataProdeuctP1"
+output: html_document
+date: "Jan, 26, 2020"
+---
+
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+
+Intructions
+
+Create a web page using R Markdown that features a map created with Leaflet. 
+Host your webpage on either GitHub Pages, RPubs, or NeoCities.
+Your webpage must contain the date that you created the document, and it must contain a map created with Leaflet. We would love to see you show off your creativity! 
+
+
+## Location
+Selected NY city and top 4 building
+
+```{r chunk 1}
+library(leaflet)
+lats<-c(40.778384, 40.723430,40.669387, 40.744049)
+longs<-c( -73.968258, -73.999568,-73.965259, -73.848336)
+places<-c('Central Park', 'Lower Manhattan', 'Brooklyn Botanic Garden','Queen Zoo')
+states<-c('Manhattan', 'Manhattan', 'Brooklyn','Queens')
+df<-data.frame(lat=lats, lng=longs, places=places, states=states, statecolor=c("blue","blue","yellow","green") )
+
+```
+
+## Including Plot graph
+map interactive
+
+
+```{r chunk 2}
+df%>%leaflet()%>%addTiles()%>%addCircleMarkers(color=df$statecolor, popup = df$places) %>% addLegend(labels = states[1:4], colors=c("blue","blue", "yellow","green")) %>% addProviderTiles(providers$OpenStreetMap)
+
+```
+
